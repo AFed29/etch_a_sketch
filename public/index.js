@@ -2,8 +2,11 @@ const app = function () {
   const canvas = document.getElementById('main-canvas');
   const context = canvas.getContext('2d');
 
-  let currentX = 300;
-  let currentY = 250;
+  let currentX = canvas.width / 2;
+  let currentY = canvas.height / 2;
+
+  context.fillStyle = '#f2f2f2';
+  context.fillRect(0, 0, canvas.width, canvas.height);
 
   context.beginPath();
   context.moveTo(currentX, currentY);
@@ -30,14 +33,17 @@ const app = function () {
     if (currentX !== 0) currentX -= 5;
     drawLine();
   }
+
   const rightArrow = function () {
     if (currentX !== canvas.width) currentX += 5;
     drawLine();
   }
+
   const upArrow = function () {
     if (currentY !== 0) currentY -= 5;
     drawLine();
   }
+
   const downArrow = function () {
     if (currentY !== canvas.height) currentY += 5;
     drawLine();
@@ -51,6 +57,7 @@ const app = function () {
   const clearAll = function () {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.beginPath();
+    context.fillRect(0, 0, canvas.width, canvas.height);
   }
 
   document.addEventListener('keydown', checkKey);
