@@ -14,20 +14,30 @@ const app = function () {
   context.moveTo(currentX, currentY);
 
   const checkKey = function (event) {
-    if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      leftArrow();
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      upArrow();
-    } else if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      rightArrow();
-    } else if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      downArrow();
-    } else if (event.key === 'Backspace') {
-      clearAll();
+    const key = event.key;
+    switch (key) {
+      case 'ArrowLeft':
+        event.preventDefault();
+        leftArrow();
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        upArrow();
+        break;
+      case 'ArrowRight':
+        event.preventDefault();
+        rightArrow();
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        downArrow();
+        break;
+      case 'Backspace':
+        clearAll();
+        break;
+      case 'Delete':
+        clearAll();
+        break;
     }
   }
 
@@ -60,6 +70,11 @@ const app = function () {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.beginPath();
     context.fillRect(0, 0, canvas.width, canvas.height);
+    const canvasDiv = document.getElementById('canvas-div');
+    canvasDiv.className = 'shake';
+    setTimeout(function () {
+      canvasDiv.className = '';
+    }, 1000)
   }
 
   document.addEventListener('keydown', checkKey);
